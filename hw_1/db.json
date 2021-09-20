@@ -1,1 +1,1 @@
-{"db": {"Client": [{"random_fio": 0}, {"random_fio_1": 1}], "Taxist": [{"random_fio_2": 0}], "Order": [0], "Tariff": [0]}}
+{"db": {"Client": [{"_id": 0, "fio": "random_fio", "number": "random_number", "bank_cart": "random_bank_cart", "order": 0}], "Taxist": [{"_id": 0, "fio": "random_fio_2", "car": "random_car", "rating": "random_rating", "order": 0, "tariff": 0}], "Order": [{"_id": 0, "client": "random_fio", "taxist": "random_fio_2", "adress": "random adress", "price": "random price", "coordinate": "coordinate", "data": "20.09.2005"}], "Tariff": [0]}}

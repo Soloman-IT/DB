@@ -65,23 +65,31 @@ class Tariff:
 cl_1 = Client("random_fio", "random_number", "random_bank_cart")
 cl_2 = Client("random_fio_1", "random_number_1", "random_bank_cart_1")
 tx_1 = Taxist("random_fio_2", "random_car", "random_rating", None, None)
-or_1 = Order(cl_1, tx_1, "random adress", "random price", "coordinate", "20.09.2005")
+or_1 = Order(cl_1.fio, tx_1.fio, "random adress", "random price", "coordinate", "20.09.2005")
 tr_1 = Tariff("econom_tariff", "random_car")
-tx_1.order = or_1
-tx_1.tariff = tr_1
-cl_1.order = or_1
-data = {"db" : {"Client" : [{cl_1.fio : cl_1._id}, {cl_2.fio : cl_2._id}], "Taxist" : [{tx_1.fio : tx_1._id}], "Order" : [tx_1._id], "Tariff" : [tr_1._id]}}
+tx_1.order = or_1._id
+tx_1.tariff = tr_1._id
+cl_1.order = or_1._id
+data = {"db" : {"Client" : [cl_1.__dict__], "Taxist" : [tx_1.__dict__], "Order" : [or_1.__dict__], "Tariff" : [tr_1._id]}}
 # with open("db.json", "w") as file:
 # 	json.dump(data, file)
 with open("db.json", "r") as file:
 	data = (json.load(file))
-
-for k, v in data.items():
-	for i, n in v.items():
-		if i == "Order":
-			new_data = n
 data_cl = input("Введите клиента :")
 data_adr = input("Введите дату пример(12.01.2001)")
-for elem in Order.order_list:
-	if elem.client.fio == data_cl and elem.data == data_adr:
-		print("Найдено!")
+count_ = 0
+for k, v in data.items():
+	if k != "db":
+		break
+	for i, n in v.items():
+		if i == "Order":
+			for t, r in n[0].items():
+				if t == "client" and r == data_cl:
+					count_ += 1
+				if t == "data" and r == data_adr:
+					count_ += 1
+if count_ == 2:
+	print("Найдено!")
+# for elem in Order.order_list:
+# 	if elem.client.fio == data_cl and elem.data == data_adr:
+# 		print("Найдено!")
